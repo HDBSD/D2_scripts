@@ -22,7 +22,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='Destiny2 Skate Marcos',
+    name='main',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -35,8 +35,6 @@ exe = EXE(
     entitlements_file=None,
 )
 
-"""
-
 coll = COLLECT(
     exe,
     a.binaries,
@@ -45,7 +43,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='myspecfile',
+    name='main',
 )
-
-"""
