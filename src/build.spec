@@ -1,6 +1,3 @@
-import os
-Path = os.path.dirname(__file__)
-
 block_cipher = None
 
 a = Analysis(
