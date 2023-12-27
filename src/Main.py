@@ -1,10 +1,28 @@
+import os
 import keyboard as kb
 import pyautogui
+import configparser
 from time import sleep
 from win32gui import GetWindowText, GetForegroundWindow
 
 Enabled = True
 ClassMode = 0
+
+Ground = "g"
+Edge = "h"
+Switch = ","
+Toggle = "l"
+
+# if config/ini exists
+
+if os.path.isfile("./config.ini"):
+    config = configparser.ConfigParser()
+    config.read("config.ini")
+    Ground = config['BINDS']['ground']
+    Edge = config['BINDS']['edge']
+    Switch = config['BINDS']['switch']
+    Toggle = config['BINDS']['toggle']
+
 
 def HunterEdgeSkate():
     print("Hunter EdgeSkate")
@@ -90,36 +108,37 @@ def main():
     print("")
     print("Mode: Warlock")
     print("")
-    print("L: Enable Script")
-    print("G: Ground Skate (Slow)")
-    print("H: Edge Skate (Fast)")
+    print(Toggle.capitalize() + ": Enable Script")
+    print(Ground.capitalize() + ": Ground Skate (Slow)")
+    print(Edge.capitalize()   + ": Edge Skate (Fast)")
+    print(Switch.capitalize() + ": Class (Mode) Swap")
     print("==============================")
     print("")
     while True:
         ActiveProc = GetWindowText(GetForegroundWindow())
-        if kb.is_pressed("h") and ActiveProc == 'Destiny 2' and Enabled:
-            print("'H' pressed!")
+        if kb.is_pressed(Edge) and ActiveProc == 'Destiny 2' and Enabled:
+            print("'" + Edge.capitalize() + "' pressed!")
             if ClassMode == 0:
                 WarlockEdgeSkate()
             else:
                 HunterEdgeSkate()
             sleep(1)
-        elif kb.is_pressed("g") and ActiveProc == 'Destiny 2' and Enabled:
-            print("'G' pressed!")
+        elif kb.is_pressed(Ground) and ActiveProc == 'Destiny 2' and Enabled:
+            print("'" + Ground.capitalize() + "' pressed!")
             if ClassMode == 0:
                 WarlockGroundSkate()
             else:
                 HunterGroundSkate()
             sleep(1)
-        elif kb.is_pressed("l"):
-            print("'L' pressed!")
+        elif kb.is_pressed(Toggle):
+            print("'" + Toggle.capitalize() + "' pressed!")
             Enabled = not Enabled
             print("Menu Enabled: " + str(Enabled))
             sleep(1)
         elif kb.is_pressed("n"):
             print(ActiveProc)
             sleep(1)
-        elif kb.is_pressed(","):
+        elif kb.is_pressed(Switch):
             if ClassMode == 0:
                 ClassMode = 1
                 print("Mode changed to Hunter")
