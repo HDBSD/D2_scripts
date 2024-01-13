@@ -50,7 +50,7 @@ def WarlockEdgeSkate():
     pyautogui.keyUp("3", _pause = False)
     sleep(0.500)
     pyautogui.rightClick(_pause = False)
-    sleep(0.020)
+    sleep(0.050)
     pyautogui.keyDown("space", _pause = False)
     pyautogui.keyDown("f", _pause = False)
     sleep(0.050)
