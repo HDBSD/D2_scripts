@@ -41,6 +41,10 @@ jobs:
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
+        name : ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+        generate_release_notes: true
         files: |
           release.zip
       env:
