@@ -8,48 +8,30 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
+    
     - uses: actions/checkout@v2
-
-    - name: Set outputs
+    
+    - name: Set Version Var
       id: fetch-version
       run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
-    - name: Check outputs
-      run: echo ${{ steps.fetch-version.outputs.sha_short }}
 
     - name: Create Application Package
       uses: JackMcKew/pyinstaller-action-windows@python3-10-pyinstaller-5-3
       with:
         path: src
 
-#    - name: artifact upload
-#      id  : artifact-upload-step
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: Upload-Exe
-#        path: src/dist/windows/D2Macros
-#        
-#    - name: Output artifact ID
-#      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
-
     - name: Create Release Archive
       uses: vimtor/action-zip@v1.1
       with:
         files: src/dist/windows/D2Macros
         dest: release.zip
-
-#    - name: Main
-#      run: |
-#          ls
-
+        
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: v${{ steps.fetch-version.outputs.sha_short }}
+        tag_name: Release-${{ steps.fetch-version.outputs.sha_short }}
         draft: false
         prerelease: false
         generate_release_notes: true
