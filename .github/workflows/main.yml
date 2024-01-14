@@ -14,7 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Package Application
+    - name: Fetch version
+      run: |
+        VERSION=$(echo "${GITHUB_HEAD_REF}" | sed "s/release\\/v//")
+        echo "version=${VERSION}" >> $GITHUB_OUTPUT
+      id: fetch-version
+
+    - name: Create Application Package
       uses: JackMcKew/pyinstaller-action-windows@python3-10-pyinstaller-5-3
       with:
         path: src
@@ -29,7 +35,8 @@ jobs:
 #    - name: Output artifact ID
 #      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
 
-    - uses: vimtor/action-zip@v1.1
+    - name: Create Release Archive
+      uses: vimtor/action-zip@v1.1
       with:
         files: src/dist/windows/D2Macros
         dest: release.zip
@@ -41,7 +48,7 @@ jobs:
     - name: Release with Notes
       uses: softprops/action-gh-release@v1
       with:
-        name : ${{ github.ref_name }}
+        tag_name: v${{ steps.fetch-version.outputs.version }}
         draft: false
         prerelease: false
         generate_release_notes: true
