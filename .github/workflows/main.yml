@@ -19,28 +19,29 @@ jobs:
       with:
         path: src
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Upload-Exe 
-        path: src/dist/windows/D2Macros
-
-    - name: Output artifact ID
-      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+#    - name: artifact upload
+#      id  : artifact-upload-step
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: Upload-Exe
+#        path: src/dist/windows/D2Macros
+#        
+#    - name: Output artifact ID
+#      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
 
     - uses: vimtor/action-zip@v1.1
       with:
         files: src/dist/windows/D2Macros
         dest: release.zip
 
-    - name: Main
-      run: |
-          ls
-          
-#    - name: Release with Notes
-#      uses: softprops/action-gh-release@v1
-#      with:
-#        files: |
-#          app/build/outputs/apk/release/app-release-unsigned.apk
-#          other/files/as/needed
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Main
+#      run: |
+#          ls
+
+    - name: Release with Notes
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          release.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
