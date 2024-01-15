@@ -44,5 +44,5 @@ coll = COLLECT(
     upx=True,
     upx_exclude=[],
     name='D2Macros',
-    Tree('Libs', prefix='lib')
+    Tree('subfolder_name', prefix='lib'),
 )
