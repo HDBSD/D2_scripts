@@ -33,6 +33,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    onefile=True,
 )
 
 coll = COLLECT(
@@ -44,5 +45,4 @@ coll = COLLECT(
     upx=True,
     upx_exclude=[],
     name='D2Macros',
-    Tree('subfolder_name', prefix='lib'),
 )
