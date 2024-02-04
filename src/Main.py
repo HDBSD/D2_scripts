@@ -13,6 +13,12 @@ Edge = "h"
 Switch = ","
 Toggle = "l"
 
+HeavyWep = "3"
+AltWep = "1"
+Jump = "space"
+AirMove = "x"
+Super = "f"
+
 # if config/ini exists
 
 if os.path.isfile("./config.ini"):
@@ -22,85 +28,114 @@ if os.path.isfile("./config.ini"):
     Edge = config['BINDS']['edge']
     Switch = config['BINDS']['switch']
     Toggle = config['BINDS']['toggle']
+    HeavyWep = config['GameBinds']['HeavyWep']
+    AltWep = config['GameBinds']['AltWep']
+    Jump = config['GameBinds']['Jump']
+    AirMove = config['GameBinds']['AirMove']
+    Super = config['GameBinds']['Super']
+else:
+    config = configparser.ConfigParser()
+    
+    config["BINDS"] = {
+        "Ground": Ground,
+        "Edge": Edge,
+        "Switch": Switch,
+        "Toggle": Toggle
+    }
+
+    config["GameBinds"] = {
+        "HeavyWep": HeavyWep,
+        "AltWep": AltWep,
+        "Jump": Jump,
+        "AirMove": AirMove,
+        "Super": Super
+    }
+
+    with open('./config.ini', 'w') as configfile:
+        config.write(configfile)
+
+    k = input("Press Return to Exit")
+
+    exit()
 
 
 def HunterEdgeSkate():
     print("Hunter EdgeSkate")
-    pyautogui.keyDown("3", _pause = False)
+    pyautogui.keyDown(HeavyWep, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("3", _pause = False)
+    pyautogui.keyUp(HeavyWep, _pause = False)
     sleep(0.500)
     pyautogui.rightClick(_pause = False)
     sleep(0.050)
-    pyautogui.keyDown("space", _pause = False)
+    pyautogui.keyDown(Jump, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("space", _pause = False)
+    pyautogui.keyUp(Jump, _pause = False)
     sleep(0.050)
-    pyautogui.keyDown("x", _pause = False)
+    pyautogui.keyDown(AirMove, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("x", _pause = False)
+    pyautogui.keyUp(AirMove, _pause = False)
     pyautogui.keyDown("2", _pause = False)
     sleep(0.01)
     pyautogui.keyUp("2", _pause = False)
 
 def WarlockEdgeSkate():
     print("Warlock EdgeSkate")
-    pyautogui.keyDown("3", _pause = False)
+    pyautogui.keyDown(HeavyWep, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("3", _pause = False)
+    pyautogui.keyUp(HeavyWep, _pause = False)
     sleep(0.500)
     pyautogui.rightClick(_pause = False)
     sleep(0.050)
-    pyautogui.keyDown("space", _pause = False)
-    pyautogui.keyDown("f", _pause = False)
+    pyautogui.keyDown(Jump, _pause = False)
+    pyautogui.keyDown(Super, _pause = False)
     sleep(0.050)
-    pyautogui.keyUp("f", _pause = False)
-    pyautogui.keyUp("space", _pause = False)
+    pyautogui.keyUp(Super, _pause = False)
+    pyautogui.keyUp(Jump, _pause = False)
 
 def HunterGroundSkate():
     print("Hunter GroundSkate")
-    pyautogui.keyDown("3", _pause = False)
+    pyautogui.keyDown(HeavyWep, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("3", _pause = False)
+    pyautogui.keyUp(HeavyWep, _pause = False)
     sleep(0.500)
-    pyautogui.keyDown("space", _pause = False)
+    pyautogui.keyDown(Jump, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("space", _pause = False)
+    pyautogui.keyUp(Jump, _pause = False)
     sleep(0.03)
     pyautogui.leftClick(_pause = False)
     sleep(0.025)
-    pyautogui.keyDown("space", _pause = False)
+    pyautogui.keyDown(Jump, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("space", _pause = False)
+    pyautogui.keyUp(Jump, _pause = False)
     sleep(0.025)
-    pyautogui.keyDown("x", _pause = False)
+    pyautogui.keyDown(AirMove, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("x", _pause = False)
+    pyautogui.keyUp(AirMove, _pause = False)
     sleep(0.300)
-    pyautogui.keyDown("1", _pause = False)
+    pyautogui.keyDown(AltWep, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("1", _pause = False)
+    pyautogui.keyUp(AltWep, _pause = False)
 
 
 def WarlockGroundSkate():
     print("Warlock GroundSkate")
-    pyautogui.keyDown("3", _pause = False)
+    pyautogui.keyDown(HeavyWep, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("3", _pause = False)
+    pyautogui.keyUp(HeavyWep, _pause = False)
     sleep(0.500)
-    pyautogui.keyDown("space", _pause = False)
+    pyautogui.keyDown(Jump, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("space", _pause = False)
+    pyautogui.keyUp(Jump, _pause = False)
     sleep(0.01)
     pyautogui.leftClick(_pause = False)
     sleep(0.025)
-    pyautogui.keyDown("space", _pause = False)
+    pyautogui.keyDown(Jump, _pause = False)
     sleep(0.01)
-    pyautogui.keyUp("space", _pause = False)
+    pyautogui.keyUp(Jump, _pause = False)
     sleep(0.025)
-    pyautogui.keyDown("f", _pause = False)
+    pyautogui.keyDown(Super, _pause = False)
     sleep(0.010)
-    pyautogui.keyUp("f", _pause = False)
+    pyautogui.keyUp(Super, _pause = False)
 
 def main():
     global Enabled, ClassMode
